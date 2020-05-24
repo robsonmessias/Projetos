@@ -7,9 +7,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
-
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // our default array of dreams
 const dreams = [
@@ -18,16 +16,15 @@ const dreams = [
   "Wash the dishes"
 ];
 
-
-app.post("/OneTec", function(request, response){
+app.post("/OneTec", function(request, response) {
   var intentName = request.body.queryResult.intent.displayName;
-  
-  if(intentName == "")
-  
-  
-})
 
-
+  if (intentName == "Pizzas") {
+    response.json({
+      fulfillmentText: "Sua mensagem teste deu certo!!! uhuuu!!!"
+    });
+  }
+});
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
