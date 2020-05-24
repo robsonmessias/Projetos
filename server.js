@@ -21,7 +21,7 @@ app.post("/OneTec", function(request, response) {
 
   if (intentName == "Pizzas") {
     response.json({
-      fulfillmentText: "Sua mensagem teste deu certo!!! uhuuu!!!"
+      fulfillmentText: "Sua mensagem teste deu certo!!!"
     });
   }
 });
