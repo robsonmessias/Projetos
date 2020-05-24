@@ -26,6 +26,21 @@ app.post("/OneTec", function(request, response) {
   }
 });
 
+{
+  "followupEventInput": {
+    "name": "event-name",
+    "parameters": {
+      "parameter-name-1": "parameter-value-1",
+      "parameter-name-2": "parameter-value-2"
+    },
+    "languageCode": "en-US"
+  }
+}
+
+
+
+
+
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
