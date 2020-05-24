@@ -18,7 +18,7 @@ const dreams = [
 
 app.post("/OneTec", function(request, response) {
   var intentName = request.body.queryResult.intent.displayName;
-
+  
   if (intentName == "Pizzas") {
     response.json({
       fulfillmentText: "Sua mensagem teste deu certo!!!"
@@ -26,18 +26,8 @@ app.post("/OneTec", function(request, response) {
   }
 });
 
-{
-  "followupEventInput": {
-    "name": "event-name",
-    "parameters": {
-      "parameter-name-1": "parameter-value-1",
-      "parameter-name-2": "parameter-value-2"
-    },
-    "languageCode": "en-US"
-  }
-}
-
-
+// ####### CHAMAR CADASTRO #######
+//agent.setFollowupEvent("Pizzas");
 
 
 
