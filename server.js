@@ -5,6 +5,11 @@
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
 
 // our default array of dreams
 const dreams = [
@@ -12,6 +17,17 @@ const dreams = [
   "Climb a really tall mountain",
   "Wash the dishes"
 ];
+
+
+app.post("/OneTec", function(request, response){
+  var intentName = request.body.queryResult.intent.displayName;
+  
+  if(intentName == "")
+  
+  
+})
+
+
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
