@@ -8,10 +8,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 // our default array of dreams
 const dreams = [
@@ -21,47 +19,48 @@ const dreams = [
 ];
 
 app.post("/OneTec", function(request, response) {
- 
   var connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASS,
     database: process.env.MYSQL_DB
   });
-  
+
   connection.connect();
-  
+
   var intentName = request.body.queryResult.intent.displayName;
 
-  if(intentName == "addCadastro"){
-    console.log('incluir')
+  if (intentName == "addCadastro") {
+    console.log("incluir");
 
-    var cadastroNome = request.body.queryResult.parameters['nome'];
-    var cadastroSobreNome = request.body.queryResult.parameters['sobrenome'];
-    var cadastroTelefone = request.body.queryResult.parameters['telefone'];
-    var query = 'Insert into Cadastro values ("'+cadastroNome+'","'+cadastroSobreNome+'","'+cadastroTelefone+'")';
-    
-    connection.query(query, function (error, results, fields) {
-      if(error) throw error;
+    var cadastroNome = request.body.queryResult.parameters["nome"];
+    var cadastroSobreNome = request.body.queryResult.parameters["sobrenome"];
+    var cadastroTelefone = request.body.queryResult.parameters["telefone"];
+    var query =
+      'Insert into Cadastro values ("' +
+      cadastroNome +
+      '","' +
+      cadastroSobreNome +
+      '","' +
+      cadastroTelefone +
+      '")';
+
+    connection.query(query, function(error, results, fields) {
+      if (error) throw error;
       connection.end();
-      response.json({"fulfillmentText" : "Contato Adicionado com sucesso!"})
-
+        response.json({ fulfillmentText: "Contato Adicionado com sucesso!" });
     });
   }
 
-  
   if (intentName == "Pizzas") {
     response.json({
       fulfillmentText: "Sua mensagem teste deu certo!!!"
     });
   }
-
 });
 
 // ####### CHAMAR CADASTRO #######
 //agent.setFollowupEvent("Pizzas");
-
-
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
@@ -71,7 +70,6 @@ app.use(express.static("public"));
 app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
-
 // send the default array of dreams to the webpage
 app.get("/dreams", (request, response) => {
   // express helps us take JS objects and send them as JSON
@@ -82,4 +80,4 @@ app.get("/dreams", (request, response) => {
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
-d
+
