@@ -29,6 +29,7 @@ app.post("/OneTec", function(request, response) {
     password: process.env.MYSQL_PASS,
     database: process.env.MYSQL_DB
   });
+  
   connection.connect();
 
   
