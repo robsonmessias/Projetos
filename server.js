@@ -6,8 +6,20 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const mysql = require("mysql");
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+var connection = mysql.createConnection({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASS,
+  database: process.env.MYSQL_DB,
+});
+connection.connect();
+
 
 // our default array of dreams
 const dreams = [
