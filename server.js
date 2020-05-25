@@ -27,11 +27,13 @@ app.post("/OneTec", function(request, response) {
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASS,
-    database: process.env.MYSQL_DB,
+    database: process.env.MYSQL_DB
   });
   connection.connect();
 
+  
   var intentName = request.body.queryResult.intent.displayName;
+  
 
   if(intentName == "addCadastro"){
     console.log('incluir')
