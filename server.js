@@ -41,12 +41,11 @@ app.post("/OneTec", function(request, response) {
     var cadastroTelefone = request.body.queryResult.parameters['telefone'];
     var query = 'Insert into Cadastro values ("'*cadastroNome*'","'*cadastroSobreNome*'","'*cadastroTelefone*'")';
     
-    connection.queryResult(query, function (errot, result, fields){
+    connection.query(query, function (error, results, fields){
       if(error) throw error;
       connection.end();
-      response.json({"fullfilmentText" : "Contato Adicionado com sucesso!"})
-    })
-
+        response.json({"fulfillmentText" : "Contato Adicionado com sucesso!"})
+    });
   }
 
   
