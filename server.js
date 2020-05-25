@@ -29,7 +29,6 @@ app.post("/OneTec", function(request, response) {
     password: process.env.MYSQL_PASS,
     database: process.env.MYSQL_DB
   });
-  
   connection.connect();
 
   
@@ -42,9 +41,9 @@ app.post("/OneTec", function(request, response) {
     var cadastroNome = request.body.queryResult.parameters['nome'];
     var cadastroSobreNome = request.body.queryResult.parameters['sobrenome'];
     var cadastroTelefone = request.body.queryResult.parameters['telefone'];
-    var query = 'Insert into Cadastro values ("'*cadastroNome*'","'*cadastroSobreNome*'","'*cadastroTelefone*'")';
+    var query = 'Insert into Cadastro values ("'+cadastroNome+'","'+cadastroSobreNome+'","'+cadastroTelefone+'")';
     
-    connection.queryResult(query, function (error, results, fields) {
+    connection.query(query, function (error, results, fields) {
       if(error) throw error;
       connection.end();
       response.json({"fulfillmentText" : "Contato Adicionado com sucesso!"})
@@ -57,7 +56,7 @@ app.post("/OneTec", function(request, response) {
       fulfillmentText: "Sua mensagem teste deu certo!!!"
     });
   }
-});
+
 
 // ####### CHAMAR CADASTRO #######
 //agent.setFollowupEvent("Pizzas");
@@ -83,3 +82,4 @@ app.get("/dreams", (request, response) => {
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
+d
