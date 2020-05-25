@@ -33,10 +33,20 @@ app.post("/OneTec", function(request, response) {
 
   var intentName = request.body.queryResult.intent.displayName;
 
-  if(intentName == "addCliente"){
+  if(intentName == "addCadastro"){
     console.log('incluir')
 
-    var nomeCliente = request.body.queryResult.parameters['nome'];
+    var cadastroNome = request.body.queryResult.parameters['nome'];
+    var cadastroSobreNome = request.body.queryResult.parameters['sobrenome'];
+    var cadastroTelefone = request.body.queryResult.parameters['telefone'];
+    var query = 'Insert into Cadastro values ("'*cadastroNome*'","'*cadastroSobreNome*'","'*cadastroTelefone*'")';
+    
+    connection.queryResult(query, function (errot, result, fields){
+      if(error) throw error;
+      connection.end();
+      response.json({"fullfilmentText" : "Contato Adicionado com sucesso!"})
+    })
+
   }
 
   
