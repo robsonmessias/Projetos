@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
 // our default array of dreams
 const dreams = [
   "Find and count some sheep",
@@ -29,11 +28,10 @@ app.post("/OneTec", function(request, response) {
     password: process.env.MYSQL_PASS,
     database: process.env.MYSQL_DB
   });
+  
   connection.connect();
-
   
   var intentName = request.body.queryResult.intent.displayName;
-  
 
   if(intentName == "addCadastro"){
     console.log('incluir')
@@ -47,6 +45,7 @@ app.post("/OneTec", function(request, response) {
       if(error) throw error;
       connection.end();
       response.json({"fulfillmentText" : "Contato Adicionado com sucesso!"})
+
     });
   }
 
@@ -57,6 +56,7 @@ app.post("/OneTec", function(request, response) {
     });
   }
 
+});
 
 // ####### CHAMAR CADASTRO #######
 //agent.setFollowupEvent("Pizzas");
