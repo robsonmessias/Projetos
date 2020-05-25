@@ -1,7 +1,7 @@
 dependencies:
   body-parser: 1.19.0
   express: 4.17.1
-  mysql: 2.18.1
+  mysql: 2.18.0
 packages:
   /accepts/1.3.7:
     dependencies:
@@ -279,7 +279,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
-  /mysql/2.18.1:
+  /mysql/2.18.0:
     dependencies:
       bignumber.js: 9.0.0
       readable-stream: 2.3.7
@@ -289,7 +289,7 @@ packages:
     engines:
       node: '>= 0.6'
     resolution:
-      integrity: sha512-Bca+gk2YWmqp2Uf6k5NFEurwY/0td0cpebAucFpY/3jhrwrVGuxU2uQFCHjU19SJfje0yQvi+rVWdq78hR5lig==
+      integrity: sha512-juoIQE2FAoa0qRX5gReXvxDJph6Pqdx4X7aJ2HBe9GRNPIYQIiOgfrFNd3AQ8FtyeKEx3eNNnrtcVIAchc/NOw==
   /negotiator/0.6.2:
     dev: false
     engines:
@@ -466,4 +466,4 @@ shrinkwrapVersion: 3
 specifiers:
   body-parser: ^1.19.0
   express: ^4.17.1
-  mysql: ^2.18.0
+  mysql: 2.18.0
