@@ -62,10 +62,11 @@ app.post("/OneTec", function(request, response) {
       if(error) throw error;
       connection.end();
       
-      if(results[0].nome != telContato){
+      if(results[0].telefone == '') {
         var contato = 'Seu nome é...'+results[0].nome;
-      } else contato = 'Precisa fazer cadastro.'
-      
+      }else {
+        var contato = 'Precisa fazer cadastro.';
+      } 
       
       response.json({ "fulfillmentText": contato })
     })
