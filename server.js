@@ -62,8 +62,8 @@ app.post("/OneTec", function(request, response) {
       if(error) throw error;
       connection.end();
       
-      if(results[0].nome != null){
-        var contato = 'Seu nome é..."'+results[0].nome+'"';  
+      if(error != "Cannot read property 'nome' of undefined"){
+        var contato = 'Seu nome é...'+results[0].nome;
       } else contato = 'Precisa fazer cadastro.'
       
       
