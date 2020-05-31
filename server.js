@@ -62,8 +62,20 @@ app.post("/OneTec", function(request, response) {
         var contato = 'Seu nome é...'+results[0].nome;
         response.json({ "fulfillmentText": contato })
       } else{
-          response.json({ fulfillmentText: "Você ainda não possui cadastro" })
-          response.json({ fulfillmentMessages: [{ quickReplies: {title: 'Hello',quickReplies: ['First Reply','Second Reply',],},platform: 'FACEBOOK'},]});
+          //response.json({ fulfillmentText: "Você ainda não possui cadastro" })
+          
+          let richResponses = [
+                {
+                    "quickReplies": {
+                        "title": "Você ainda não possui cadastro. Por favor, clique no botão abaixo",
+                        "quickReplies": [
+                            "Cadastrar"
+                        ]
+                    },
+                    "platform": "FACEBOOK"
+                }
+            ] 
+        response.json({ fulfillmentMessages: richResponses});
       }
     });
     connection.end();
