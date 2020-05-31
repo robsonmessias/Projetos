@@ -50,15 +50,20 @@ app.post("/OneTec", function(request, response) {
       connection.end();
         response.json({ fulfillmentText: "Contato Adicionado com sucesso!" });
     });
-  } else if(intentName == "Identificar") {
+  } 
+  else if(intentName == "Identificar") {
     console.log("Identificando cliente");
     
     var telContato = request.body.queryResult.parameters["telefone"];
+    
     var query = 'select * from Cadastro where telefono = "'+telContato+'"';
-    connection.query(query, function(error, result, fields){
+    connection.query(query, function(error, results, fields){
       if(error) throw error;
       connection.end();
       var contato = '';
+      
+      contato = 'Seu nome é '+results[0].nome+' '+results[0].sobrenome+'?';
+      response.json({"fulfilmentText": contato})
     })
     
   }
