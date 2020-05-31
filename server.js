@@ -50,8 +50,8 @@ app.post("/OneTec", function(request, response) {
       connection.end();
         response.json({ fulfillmentText: "Contato Adicionado com sucesso!" });
     });
-  } 
-  else if(intentName == "Identificar") {
+    
+  }else if(intentName == "Identificar") {
     console.log("Identificando cliente");
     
     let telContato = request.body.queryResult.parameters["telefone"];
@@ -62,41 +62,13 @@ app.post("/OneTec", function(request, response) {
         var contato = 'Seu nome é...'+results[0].nome;
         response.json({ "fulfillmentText": contato })
       } else{
-          return response.json({
-					fulfillmentText: dataToSend,
-					source: 'appCadastro'
-				})
+          response.json({ source: 'appCadastro' })
       }
     });
     connection.end();
-          
-    /*
-    var telContato = request.body.queryResult.parameters["telefone"];
-    
-    var query = 'select * from Cadastro where telefone = "'+telContato+'"';
-                
-    connection.query(query, function(error, results, fields){
-      if(error) throw error;
-      var contato = 'Precisa fazer cadastro.';
-      connection.end();
-      
-      
-      var contato = 'Seu nome é...'+results[0].nome;
-      
-        
-      
-      
-      response.json({ "fulfillmentText": contato })
-    })*/
-    
+             
   }
   
-  
-  
-  
-  
-  
-
   if (intentName == "Pizzas") {
     response.json({
       fulfillmentText: "Sua mensagem teste deu certo!!!"
