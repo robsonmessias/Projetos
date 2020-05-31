@@ -64,7 +64,7 @@ app.post("/OneTec", function(request, response) {
       
       var contato = '';
       
-      contato = 'Seu nome é '+results[0].nome+' '+results[0].sobrenome+'?';
+      contato = 'Seu nome é...';//'+results[0].sobrenome+'
       response.json({"fulfillmentText": contato})
     })
     
