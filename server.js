@@ -57,9 +57,11 @@ app.post("/OneTec", function(request, response) {
     var telContato = request.body.queryResult.parameters["telefone"];
     
     var query = 'select * from Cadastro where telefone = "'+telContato+'"';
+                
     connection.query(query, function(error, results, fields){
       if(error) throw error;
       connection.end();
+      
       var contato = '';
       
       contato = 'Seu nome é '+results[0].nome+' '+results[0].sobrenome+'?';
