@@ -55,27 +55,16 @@ app.post("/OneTec", function(request, response) {
     console.log("Identificando cliente");
     
     let telContato = request.body.queryResult.parameters["telefone"];
+    let query = 'select * from Cadastro where telefone = "'+telContato+'"';
     
-    connection.query( 'SELECT * FROM Cadastro WHERE telefone =' + telContato, function( error, results, fields ){
-      if( !error ){
-
-        let response = "The solution is: ";
-        response = response.toString();
-        let output = {'speech': response, 'displayText': response};
-        console.log( output );
-        
+    connection.query( query, function( error, results, fields ){
+      if( results[0]){
         response.json({ "fulfillmentText": "deu certo" })
       } else{
-
-          let output = {
-            'speech': 'Error. Query Failed.',
-            'displayText': 'Error. Query Failed.'
-          };
-          console.log( output );
-          response.json({ "fulfillmentText": "deu certo" })
+          response.json({ "fulfillmentText": "NÃO achei" })
       }
-      });
-          connection.end();
+    });
+    connection.end();
           
     /*
     var telContato = request.body.queryResult.parameters["telefone"];
