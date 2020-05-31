@@ -63,7 +63,7 @@ app.post("/OneTec", function(request, response) {
         response.json({ "fulfillmentText": contato })
       } else{
           response.json({ fulfillmentText: "Você ainda não possui cadastro" })
-           
+          response.json({ fulfillmentMessages: [{ quickReplies: {title: 'Hello',quickReplies: ['First Reply','Second Reply',],},platform: 'FACEBOOK'},}]});
       }
     });
     connection.end();
