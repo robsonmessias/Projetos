@@ -62,7 +62,8 @@ app.post("/OneTec", function(request, response) {
         var contato = 'Seu nome é...'+results[0].nome;
         response.json({ "fulfillmentText": contato })
       } else{
-          response.json({ source: 'appCadastro' })
+          response.json({ fulfillmentText: "Você ainda não possui cadastro" })
+           
       }
     });
     connection.end();
