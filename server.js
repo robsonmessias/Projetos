@@ -35,7 +35,7 @@ app.post("/OneTec", function(request, response) {
 
     var cadastroNome = request.body.queryResult.parameters["nome"];
     var cadastroSobreNome = request.body.queryResult.parameters["sobrenome"];
-    var cadastroTelefone = request.body.queryResult.parameters["#Identificar.telefone"];
+    var cadastroTelefone = request.body.queryResult.parameters["telefone"];
     var query =
       'Insert into Cadastro values ("' +
       cadastroNome +
