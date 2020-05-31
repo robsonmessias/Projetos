@@ -35,7 +35,7 @@ app.post("/OneTec", function(request, response) {
 
     var cadastroNome = request.body.queryResult.parameters["nome"];
     var cadastroSobreNome = request.body.queryResult.parameters["sobrenome"];
-    var cadastroTelefone = request.body.queryResult.parameters["telefone"];
+    var cadastroTelefone = request.body.queryResult.parameters["#Identificar.telefone"];
     var query =
       'Insert into Cadastro values ("' +
       cadastroNome +
@@ -59,9 +59,10 @@ app.post("/OneTec", function(request, response) {
     
     connection.query( query, function( error, results, fields ){
       if( results[0]){
-        response.json({ "fulfillmentText": "deu certo" })
+        var contato = 'Seu nome é...'+results[0].nome;
+        response.json({ "fulfillmentText": contato })
       } else{
-          response.json({ "fulfillmentText": "NÃO achei" })
+          app.setFollowupEvent("addCadastro");
       }
     });
     connection.end();
