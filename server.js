@@ -29,7 +29,7 @@ app.post("/OneTec", function(request, response) {
   connection.connect();
 
   var intentName = request.body.queryResult.intent.displayName;
-
+  //### CRIAR CADASTRO ###//
   if (intentName == "addCadastro") {
     console.log("incluir");
 
@@ -50,7 +50,7 @@ app.post("/OneTec", function(request, response) {
       connection.end();
         response.json({ fulfillmentText: "Contato Adicionado com sucesso!" });
     });
-    
+    //### PESQUISAR CADASTRO ###//
   }else if(intentName == "Identificar") {
     console.log("Identificando cliente");
     
@@ -61,10 +61,9 @@ app.post("/OneTec", function(request, response) {
       if( results[0]){
         var contato = 'Seu nome é...'+results[0].nome;
         response.json({ "fulfillmentText": contato })
+      
       } else{
-          //response.json({ fulfillmentText: "Você ainda não possui cadastro" })
-          
-          let richResponses = [
+          /*let richResponses = [
                 {
                     "quickReplies": {
                         "title": "Você ainda não possui cadastro. Por favor, clique no botão abaixo",
@@ -75,18 +74,14 @@ app.post("/OneTec", function(request, response) {
                     "platform": "FACEBOOK"
                 }
             ] 
-        response.json({ fulfillmentMessages: richResponses});
+        response.json({ fulfillmentMessages: richResponses});*/
+        agent.setFollowupEvent("aaCadastro");
       }
     });
     connection.end();
              
   }
   
-  if (intentName == "Pizzas") {
-    response.json({
-      fulfillmentText: "Sua mensagem teste deu certo!!!"
-    });
-  }
 });
 
 // ####### CHAMAR CADASTRO #######
