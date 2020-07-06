@@ -33,17 +33,22 @@ app.post("/pizzas", function(request, response ){
   
   if (intentName == "cep.consultar") {
     
+    const sem_cep = request.body.queryResult.parameters["sem_cep"]
     const endereco1 = "14055480";
     const endereco2 = request.body.queryResult.parameters["cep"];
 
     CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
-      if(distancia < 4) {
-        response.json({ fulfillmentText:  "Este endereço fica a menos de 4 Km de distância.\nA taxa de entrega é R$ 3,00" });
-       //retorna o mesmo 'distancia' da versão em promise
-      }else if(distancia > 4 && distancia < 8 ){
-        response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
-      }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
+      if(sem_cep != ''){
+        
+        if(distancia < 4) {
+          response.json({ fulfillmentText:  "Este endereço fica a menos de 4 Km de distância.\nA taxa de entrega é R$ 3,00" });
+         //retorna o mesmo 'distancia' da versão em promise
+        }else if(distancia > 4 && distancia < 8 ){
+          response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
+        }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
+        
+      }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
       
     })
     .catch(err => {
