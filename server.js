@@ -32,11 +32,12 @@ app.post("/pizzas", function(request, response ){
   var intentName = request.body.queryResult.intent.displayName;
   
   if (intentName == "cep.consultar") {
-    
-    const endereco1 = "Sp, carapicuíba avenida francisco pignatari";
-    const endereco2 = "Sp, jandira rua elton silva";
+    const contexto = request.body.queryResult.outputContext[0];
 
-    CepCoords.getDistEntreCeps("06310390", "06600025")
+    const endereco1 = "06310390";
+    const endereco2 = contexto.parameters.cep;
+
+    CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
       if(distancia> 0 && distancia < 4) {
         response.json({ fulfillmentText:  "Este endereço fica a " + distancia + "Km de distância.\nA taxa de entrega é R$ 3,00" });
