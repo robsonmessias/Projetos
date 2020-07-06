@@ -39,7 +39,7 @@ app.post("/pizzas", function(request, response ){
 
     CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
-      if(sem_cep != ''){
+      if(sem_cep == ''){
         
         if(distancia < 4) {
           response.json({ fulfillmentText:  "Este endereço fica a menos de 4 Km de distância.\nA taxa de entrega é R$ 3,00" });
