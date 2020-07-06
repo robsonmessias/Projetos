@@ -32,10 +32,9 @@ app.post("/pizzas", function(request, response ){
   var intentName = request.body.queryResult.intent.displayName;
   
   if (intentName == "cep.consultar") {
-    const contexto = request.body.queryResult.outputContext[1];
-
+    
     const endereco1 = "14055480";
-    const endereco2 = contexto.parameters.cep;
+    const endereco2 = request.body.queryResult.parameters["cep"];
 
     CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
