@@ -7,34 +7,21 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
-<<<<<<< HEAD
 const BuscaCep = require('busca-cep');
 const CepCoords = require("coordenadas-do-cep");
 //const venom = require("venom-bot");
 
 let nome = "";
-=======
->>>>>>> parent of 74865c7... Update server.js
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> parent of 74865c7... Update server.js
-=======
->>>>>>> 110ab050d61ce96cf540b47a3b50ebe8a7aa23bd
 // our default array of dreams
 const dreams = [
   "Find and count some sheep",
   "Climb a really tall mountain",
   "Wash the dishes"
 ];
-<<<<<<< HEAD
 
 //=======================================================================================================================
 app.post("/pizzas", function(request, response ){
@@ -66,9 +53,7 @@ app.post("/pizzas", function(request, response ){
 });
 
 //=================================================================================
-=======
 
->>>>>>> parent of 74865c7... Update server.js
 app.post("/OneTec", function(request, response) {
   var connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
@@ -155,19 +140,12 @@ app.post("/OneTec", function(request, response) {
   }
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-//&&&&& COMENTARIO PELO GITHUB &&&&&&&&
 
->>>>>>> parent of 74865c7... Update server.js
+
+
 // ####### CHAMAR CADASTRO #######
 //agent.setFollowupEvent("Pedidos");
 
-=======
->>>>>>> 110ab050d61ce96cf540b47a3b50ebe8a7aa23bd
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 
 // https://expressjs.com/en/starter/basic-routing.html
