@@ -83,6 +83,13 @@ app.post("/pizzas", function(request, response ){
 =======
       
 >>>>>>> parent of 1e3eb3f... Update server.js
+        
+      }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
+      
+    })
+    .catch(err => {
+      response.json({ fulfillmentText: "CEP inválido.\nPor favor, digite seu CEP sem traço ou verifique se o número digitado está correto e tente de novo. " });
+       //retorna o mesmo parâmetro 'err' da versão em promise
     })
     .catch(err => {
 =======
