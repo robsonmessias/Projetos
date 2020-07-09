@@ -54,7 +54,10 @@ app.post("/pizzas", function(request, response ){
     CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of f0aa68e... Update server.js
       if(sem_cep == ''){
         
         if(distancia < 4) {
@@ -63,6 +66,7 @@ app.post("/pizzas", function(request, response ){
         }else if(distancia > 4 && distancia < 8 ){
           response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
         }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
+<<<<<<< HEAD
       }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
 =======
 >>>>>>> parent of 1e3eb3f... Update server.js
@@ -81,6 +85,12 @@ app.post("/pizzas", function(request, response ){
 >>>>>>> parent of 1e3eb3f... Update server.js
     })
     .catch(err => {
+=======
+        
+      
+    })
+    .catch(err => {
+>>>>>>> parent of f0aa68e... Update server.js
       response.json({ fulfillmentText: "CEP inválido.\nPor favor, digite seu CEP sem traço ou verifique se o número digitado está correto e tente de novo. " });
        //retorna o mesmo parâmetro 'err' da versão em promise
     })
