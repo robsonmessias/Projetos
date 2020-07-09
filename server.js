@@ -67,9 +67,11 @@ app.post("/pizzas", function(request, response ){
           response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
         }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
 <<<<<<< HEAD
+
       }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
 =======
 >>>>>>> parent of 1e3eb3f... Update server.js
+
       if(distancia < 4) {
         response.json({ fulfillmentText:  "Este endereço fica a menos de 4 Km de distância.\nA taxa de entrega é R$ 3,00" });
        //retorna o mesmo 'distancia' da versão em promise
