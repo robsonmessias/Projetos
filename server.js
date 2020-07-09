@@ -53,11 +53,8 @@ app.post("/pizzas", function(request, response ){
 
     CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 =======
->>>>>>> parent of f0aa68e... Update server.js
       if(sem_cep == ''){
         
         if(distancia < 4) {
