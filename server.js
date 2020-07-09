@@ -87,6 +87,7 @@ app.post("/pizzas", function(request, response ){
     .catch(err => {
 =======
         
+      }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
       
     })
     .catch(err => {
