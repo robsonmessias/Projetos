@@ -17,6 +17,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+
+
 // our default array of dreams
 const dreams = [
   "Find and count some sheep",
@@ -51,13 +53,7 @@ app.post("/pizzas", function(request, response ){
       response.json({ fulfillmentText: "Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"});
        //retorna o mesmo parâmetro 'err' da versão em promise
     })
-      
-    
-    
-    
   }
-  
-    
 });
 
 
