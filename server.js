@@ -7,9 +7,9 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
-
 const BuscaCep = require('busca-cep');
 const CepCoords = require("coordenadas-do-cep");
+const venom = require("venom-bot");
 
 let nome = "";
 
@@ -27,8 +27,20 @@ const dreams = [
 ];
 //=======================================================================================================================
 
+venom.create().then((client) => start(client));
+
+function start(client) {
+  client.onMessage((message) => {
+    if(message.body === "1"){
+      client.sendText(message.from, 'Veja seu cardápio');
+    }
+  });
+}
 
 
+
+
+//=======================================================================================================================
 app.post("/pizzas", function(request, response ){
   
   var intentName = request.body.queryResult.intent.displayName;
