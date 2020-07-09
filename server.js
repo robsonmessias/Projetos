@@ -7,14 +7,16 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
-
 const BuscaCep = require('busca-cep');
 const CepCoords = require("coordenadas-do-cep");
+//const venom = require("venom-bot");
 
 let nome = "";
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
 
 // our default array of dreams
@@ -27,36 +29,38 @@ const dreams = [
 
 
 
+
+
+//=======================================================================================================================
 app.post("/pizzas", function(request, response ){
   
   var intentName = request.body.queryResult.intent.displayName;
   
   if (intentName == "cep.consultar") {
     
-    const endereco1 = "Sp, carapicuíba avenida francisco pignatari";
-    const endereco2 = "Sp, jandira rua elton silva";
+    const sem_cep = request.body.queryResult.parameters["sem_cep"]
+    const endereco1 = "14055480";
+    const endereco2 = request.body.queryResult.parameters["cep"];
 
-    CepCoords.getDistEntreCeps("06310390", "06600025")
+    CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
-      if(distancia> 0 && distancia < 4) {
-        response.json({ fulfillmentText:  "Este endereço fica a " + distancia + "Km de distância.\nA taxa de entrega é R$ 3,00" });
-       //retorna o mesmo 'distancia' da versão em promise
-      }else if(distancia > 4 && distancia < 8 ){
-        response.json({ fulfillmentText:  "Este endereço fica a " + distancia + "Km de distância.\nA taxa de entrega é R$ 4,00" });
-      }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a " + distancia + "Km de distância" });}
+      if(sem_cep == ''){
+        
+        if(distancia < 4) {
+          response.json({ fulfillmentText:  "Este endereço fica a menos de 4 Km de distância.\nA taxa de entrega é R$ 3,00" });
+         //retorna o mesmo 'distancia' da versão em promise
+        }else if(distancia > 4 && distancia < 8 ){
+          response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
+        }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
+        
+      }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
       
     })
     .catch(err => {
-      response.json({ fulfillmentText: "CEP inválido.\nPor favor, digite seu CEP sem traço ou verifique se o número digitado está correto e tente de novo. " });
+      response.json({ fulfillmentText: "Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!" });
        //retorna o mesmo parâmetro 'err' da versão em promise
     })
-      
-    
-    
-    
   }
-  
-    
 });
 
 
