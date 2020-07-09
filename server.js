@@ -10,7 +10,7 @@ const mysql = require("mysql");
 <<<<<<< HEAD
 const BuscaCep = require('busca-cep');
 const CepCoords = require("coordenadas-do-cep");
-const venom = require("venom-bot");
+//const venom = require("venom-bot");
 
 let nome = "";
 =======
@@ -20,11 +20,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
 =======
 >>>>>>> parent of 74865c7... Update server.js
+=======
+>>>>>>> 110ab050d61ce96cf540b47a3b50ebe8a7aa23bd
 // our default array of dreams
 const dreams = [
   "Find and count some sheep",
@@ -34,34 +37,18 @@ const dreams = [
 <<<<<<< HEAD
 
 //=======================================================================================================================
-
-venom.create().then((client) => start(client));
-
-function start(client) {
-  client.onMessage((message) => {
-    if(message.body === "1"){
-      client.sendText(message.from, 'Veja seu cardápio');
-    }
-  });
-}
-
-
-
-
-//=======================================================================================================================
 app.post("/pizzas", function(request, response ){
   
   var intentName = request.body.queryResult.intent.displayName;
   
   if (intentName == "cep.consultar") {
     
+    const sem_cep = request.body.queryResult.parameters["sem_cep"]
     const endereco1 = "14055480";
     const endereco2 = request.body.queryResult.parameters["cep"];
 
     CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
-
-=======
       if(sem_cep == ''){
         
         if(distancia < 4) {
@@ -70,42 +57,13 @@ app.post("/pizzas", function(request, response ){
         }else if(distancia > 4 && distancia < 8 ){
           response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
         }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
-
-      }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
-
-      if(distancia < 4) {
-        response.json({ fulfillmentText:  "Este endereço fica a menos de 4 Km de distância.\nA taxa de entrega é R$ 3,00" });
-       //retorna o mesmo 'distancia' da versão em promise
-      }else if(distancia > 4 && distancia < 8 ){
-        response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
-      }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
-
     })
     .catch(err => {
-      response.json({ fulfillmentText: "Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!" })
-        
-      }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
-      
-    })
-    .catch(err => {
-      response.json({ fulfillmentText: "CEP inválido.\nPor favor, digite seu CEP sem traço ou verifique se o número digitado está correto e tente de novo. " });
-       //retorna o mesmo parâmetro 'err' da versão em promise
-    })
-    .catch(err => {
-=======
-        
-      }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
-      
-    })
-    .catch(err => {
->>>>>>> parent of f0aa68e... Update server.js
-      response.json({ fulfillmentText: "CEP inválido.\nPor favor, digite seu CEP sem traço ou verifique se o número digitado está correto e tente de novo. " });
+      response.json({ fulfillmentText: "Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!" });
        //retorna o mesmo parâmetro 'err' da versão em promise
     })
   }
 });
-
-
 
 //=================================================================================
 =======
@@ -122,8 +80,8 @@ app.post("/OneTec", function(request, response) {
   connection.connect();
 
   var intentName = request.body.queryResult.intent.displayName;
-  //### CRIAR CADASTRO ###//
-  if (intentName == "addCadastro") {
+  //==================== ### CRIAR CADASTRO ### ====================//
+  if (intentName == "cadastro") {
     console.log("incluir");
 
     var cadastroNome = request.body.queryResult.parameters["nome"];
@@ -141,42 +99,63 @@ app.post("/OneTec", function(request, response) {
     connection.query(query, function(error, results, fields) {
       if (error) throw error;
       connection.end();
-        response.json({ fulfillmentText: "Contato Adicionado com sucesso!" });
+      response.json({ fulfillmentText: "Contato Adicionado com sucesso!" });
     });
-    //### PESQUISAR CADASTRO ###//
-  }else if(intentName == "Identificar") {
+  } //==================== ### PESQUISAR CADASTRO ### ====================//
+  else if (intentName == "identificar.cliente") {
     console.log("Identificando cliente");
-    
+
+    let nome = "";
     let telContato = request.body.queryResult.parameters["telefone"];
-    let query = 'select * from Cadastro where telefone = "'+telContato+'"';
-    
-    connection.query( query, function( error, results, fields ){
-      if( results[0]){
-        var contato = 'Seu nome é...'+results[0].nome;
-        response.json({ "fulfillmentText": contato })
-      
-      } else{
-          /*let richResponses = [
-                {
-                    "quickReplies": {
-                        "title": "Você ainda não possui cadastro. Por favor, clique no botão abaixo",
-                        "quickReplies": [
-                            "Cadastrar"
-                        ]
-                    },
-                    "platform": "FACEBOOK"
-                }
-            ] 
-        response.json({ fulfillmentMessages: richResponses});*/
-        agent.setFollowupEvent("aaCadastro");
+    let query = 'select * from Cadastro where telefone = "' + telContato + '"';
+
+    connection.query(query, function(error, results, fields) {
+      if (results[0]) {
+        nome = results[0].nome;
+        let respostaIdentificar = [
+          {
+            quickReplies: {
+              title: "Seu nome é " + nome + "?",
+              quickReplies: ["Correto", "Não sou eu"]
+            },
+            platform: "FACEBOOK"
+          }
+        ];
+        response.json({ fulfillmentMessages: respostaIdentificar });
+      } else {
+        let respostaIdentificar = [
+          {
+            quickReplies: {
+              title:
+                "Você ainda não possui cadastro. Por favor, clique no botão abaixo...",
+              quickReplies: ["Cadastrar"]
+            },
+            platform: "FACEBOOK"
+          }
+        ];
+        response.json({ fulfillmentMessages: respostaIdentificar });
+        //agent.setFollowupEvent("aadCadastro");
       }
     });
     connection.end();
-             
+  } //==================== ### PEDIDO ### ====================//
+  else if (intentName == "fazer.pedido") {
+    console.log("Fazendo pedido");
+    
+    let respostaPedidos = [
+      {
+        quickReplies: {
+          title: "Seja muito bem vindo " + nome + "!\n" + "O que deseja pedir?",
+          quickReplies: ["Pizzas", "Bebidas"]
+        },
+        platform: "FACEBOOK"
+      }
+    ];
+    response.json({ fulfillmentMessages: respostaPedidos });
   }
-  
 });
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 //&&&&& COMENTARIO PELO GITHUB &&&&&&&&
@@ -185,6 +164,8 @@ app.post("/OneTec", function(request, response) {
 // ####### CHAMAR CADASTRO #######
 //agent.setFollowupEvent("Pedidos");
 
+=======
+>>>>>>> 110ab050d61ce96cf540b47a3b50ebe8a7aa23bd
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
@@ -203,4 +184,3 @@ app.get("/dreams", (request, response) => {
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
-
