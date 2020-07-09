@@ -25,7 +25,7 @@ const dreams = [
   "Climb a really tall mountain",
   "Wash the dishes"
 ];
-<<<<<<< HEAD
+
 //=======================================================================================================================
 
 venom.create().then((client) => start(client));
@@ -53,13 +53,7 @@ app.post("/pizzas", function(request, response ){
 
     CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of f0aa68e... Update server.js
-=======
->>>>>>> parent of f0aa68e... Update server.js
+
       if(sem_cep == ''){
         
         if(distancia < 4) {
@@ -68,33 +62,19 @@ app.post("/pizzas", function(request, response ){
         }else if(distancia > 4 && distancia < 8 ){
           response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
         }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
-        
       }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       if(distancia < 4) {
         response.json({ fulfillmentText:  "Este endereço fica a menos de 4 Km de distância.\nA taxa de entrega é R$ 3,00" });
        //retorna o mesmo 'distancia' da versão em promise
       }else if(distancia > 4 && distancia < 8 ){
         response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
       }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
->>>>>>> parent of 1e3eb3f... Update server.js
-      
     })
     .catch(err => {
       response.json({ fulfillmentText: "Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!" });
-=======
-=======
->>>>>>> parent of f0aa68e... Update server.js
-      
     })
     .catch(err => {
       response.json({ fulfillmentText: "CEP inválido.\nPor favor, digite seu CEP sem traço ou verifique se o número digitado está correto e tente de novo. " });
-<<<<<<< HEAD
->>>>>>> parent of f0aa68e... Update server.js
-=======
->>>>>>> parent of f0aa68e... Update server.js
        //retorna o mesmo parâmetro 'err' da versão em promise
     })
   }
@@ -103,9 +83,6 @@ app.post("/pizzas", function(request, response ){
 
 
 //=================================================================================
-=======
-
->>>>>>> parent of 74865c7... Update server.js
 app.post("/OneTec", function(request, response) {
   var connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
