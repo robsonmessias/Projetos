@@ -7,24 +7,31 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
+<<<<<<< HEAD
 const BuscaCep = require('busca-cep');
 const CepCoords = require("coordenadas-do-cep");
 const venom = require("venom-bot");
 
 let nome = "";
+=======
+>>>>>>> parent of 74865c7... Update server.js
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> parent of 74865c7... Update server.js
 // our default array of dreams
 const dreams = [
   "Find and count some sheep",
   "Climb a really tall mountain",
   "Wash the dishes"
 ];
+<<<<<<< HEAD
 
 //=======================================================================================================================
 
@@ -101,6 +108,9 @@ app.post("/pizzas", function(request, response ){
 
 
 //=================================================================================
+=======
+
+>>>>>>> parent of 74865c7... Update server.js
 app.post("/OneTec", function(request, response) {
   var connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
@@ -167,6 +177,11 @@ app.post("/OneTec", function(request, response) {
   
 });
 
+<<<<<<< HEAD
+=======
+//&&&&& COMENTARIO PELO GITHUB &&&&&&&&
+
+>>>>>>> parent of 74865c7... Update server.js
 // ####### CHAMAR CADASTRO #######
 //agent.setFollowupEvent("Pedidos");
 
