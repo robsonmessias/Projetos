@@ -7,24 +7,18 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
-<<<<<<< HEAD
 const BuscaCep = require('busca-cep');
 const CepCoords = require("coordenadas-do-cep");
 const venom = require("venom-bot");
 
 let nome = "";
-=======
->>>>>>> parent of 74865c7... Update server.js
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> parent of 74865c7... Update server.js
 // our default array of dreams
 const dreams = [
   "Find and count some sheep",
@@ -54,12 +48,12 @@ app.post("/pizzas", function(request, response ){
   
   if (intentName == "cep.consultar") {
     
-    const sem_cep = request.body.queryResult.parameters["sem_cep"]
     const endereco1 = "14055480";
     const endereco2 = request.body.queryResult.parameters["cep"];
 
     CepCoords.getDistEntreCeps(endereco1, endereco2)
     .then(distancia => {
+<<<<<<< HEAD
       if(sem_cep == ''){
         
         if(distancia < 4) {
@@ -70,6 +64,14 @@ app.post("/pizzas", function(request, response ){
         }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
         
       }else {"Nossa taxa de entrega é de acordo com distância :\nAté  4 km.          R$3,00.\nDe 4 até  8km.  R$4,00.\nNÃO entregamos acima 8 km de distância para manter a rapidez de nossas entregas!"}
+=======
+      if(distancia < 4) {
+        response.json({ fulfillmentText:  "Este endereço fica a menos de 4 Km de distância.\nA taxa de entrega é R$ 3,00" });
+       //retorna o mesmo 'distancia' da versão em promise
+      }else if(distancia > 4 && distancia < 8 ){
+        response.json({ fulfillmentText:  "Este endereço fica a mais de 4 Km de distância.\nA taxa de entrega é R$ 4,00" });
+      }else {response.json({ fulfillmentText:  "Afim de manter a rapidez de nossas entregas não entregamos em endereços que ficam a mais de 8 Km de distância" });}
+>>>>>>> parent of 1e3eb3f... Update server.js
       
     })
     .catch(err => {
