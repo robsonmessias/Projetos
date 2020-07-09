@@ -7,24 +7,31 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
+<<<<<<< HEAD
 const BuscaCep = require('busca-cep');
 const CepCoords = require("coordenadas-do-cep");
 const venom = require("venom-bot");
 
 let nome = "";
+=======
+>>>>>>> parent of 74865c7... Update server.js
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> parent of 74865c7... Update server.js
 // our default array of dreams
 const dreams = [
   "Find and count some sheep",
   "Climb a really tall mountain",
   "Wash the dishes"
 ];
+<<<<<<< HEAD
 //=======================================================================================================================
 
 venom.create().then((client) => start(client));
@@ -75,6 +82,9 @@ app.post("/pizzas", function(request, response ){
 
 
 //=================================================================================
+=======
+
+>>>>>>> parent of 74865c7... Update server.js
 app.post("/OneTec", function(request, response) {
   var connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
@@ -86,8 +96,8 @@ app.post("/OneTec", function(request, response) {
   connection.connect();
 
   var intentName = request.body.queryResult.intent.displayName;
-  //==================== ### CRIAR CADASTRO ### ====================//
-  if (intentName == "cadastro") {
+  //### CRIAR CADASTRO ###//
+  if (intentName == "addCadastro") {
     console.log("incluir");
 
     var cadastroNome = request.body.queryResult.parameters["nome"];
@@ -105,64 +115,46 @@ app.post("/OneTec", function(request, response) {
     connection.query(query, function(error, results, fields) {
       if (error) throw error;
       connection.end();
-      response.json({ fulfillmentText: "Contato Adicionado com sucesso!" });
+        response.json({ fulfillmentText: "Contato Adicionado com sucesso!" });
     });
-  } //==================== ### PESQUISAR CADASTRO ### ====================//
-  else if (intentName == "identificar.cliente") {
+    //### PESQUISAR CADASTRO ###//
+  }else if(intentName == "Identificar") {
     console.log("Identificando cliente");
-
-    let nome = "";
+    
     let telContato = request.body.queryResult.parameters["telefone"];
-    let query = 'select * from Cadastro where telefone = "' + telContato + '"';
-
-    connection.query(query, function(error, results, fields) {
-      if (results[0]) {
-        nome = results[0].nome;
-        let respostaIdentificar = [
-          {
-            quickReplies: {
-              title: "Seu nome é " + nome + "?",
-              quickReplies: ["Correto", "Não sou eu"]
-            },
-            platform: "FACEBOOK"
-          }
-        ];
-        response.json({ fulfillmentMessages: respostaIdentificar });
-      } else {
-        let respostaIdentificar = [
-          {
-            quickReplies: {
-              title:
-                "Você ainda não possui cadastro. Por favor, clique no botão abaixo...",
-              quickReplies: ["Cadastrar"]
-            },
-            platform: "FACEBOOK"
-          }
-        ];
-        response.json({ fulfillmentMessages: respostaIdentificar });
-        //agent.setFollowupEvent("aadCadastro");
+    let query = 'select * from Cadastro where telefone = "'+telContato+'"';
+    
+    connection.query( query, function( error, results, fields ){
+      if( results[0]){
+        var contato = 'Seu nome é...'+results[0].nome;
+        response.json({ "fulfillmentText": contato })
+      
+      } else{
+          /*let richResponses = [
+                {
+                    "quickReplies": {
+                        "title": "Você ainda não possui cadastro. Por favor, clique no botão abaixo",
+                        "quickReplies": [
+                            "Cadastrar"
+                        ]
+                    },
+                    "platform": "FACEBOOK"
+                }
+            ] 
+        response.json({ fulfillmentMessages: richResponses});*/
+        agent.setFollowupEvent("aaCadastro");
       }
     });
     connection.end();
-  } //==================== ### PEDIDO ### ====================//
-  else if (intentName == "fazer.pedido") {
-    console.log("Fazendo pedido");
-    
-    let respostaPedidos = [
-      {
-        quickReplies: {
-          title: "Seja muito bem vindo " + nome + "!\n" + "O que deseja pedir?",
-          quickReplies: ["Pizzas", "Bebidas"]
-        },
-        platform: "FACEBOOK"
-      }
-    ];
-    response.json({ fulfillmentMessages: respostaPedidos });
+             
   }
   
 });
 
+//&&&&& COMENTARIO PELO GITHUB &&&&&&&&
 
+// ####### CHAMAR CADASTRO #######
+//agent.setFollowupEvent("Pedidos");
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
@@ -182,3 +174,4 @@ app.get("/dreams", (request, response) => {
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
+
